@@ -16,6 +16,7 @@ export const deleteOne = (Model) => {
 
 export const updateOne = (Model) => {
   return catchAsync(async (req, res, next) => {
+    if (req.file) req.body.image = req.file.filename;
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,

@@ -23,7 +23,13 @@ router.post(
 router.get("/", getAllRestaurants);
 router.get("/getmyrestaurants/:usId", getMyRestaurants);
 
-router.patch("/id", protect, updateRestaurant);
+router.patch(
+  "/:id",
+  protect,
+  uploadRestaurantPhoto,
+  resizeRestaurantPhoto,
+  updateRestaurant
+);
 router.delete("/:id", protect, deleteRestaurant);
 router.get("/:id", getRestaurant);
 
