@@ -17,10 +17,14 @@ function classNames(...classes) {
 
 export default function BetterProfile({
   user,
-  setCurrentProfilePage,
-  currentProfilePage,
   restaurants,
   reviews,
+  handleRestaurantClick,
+  handleUsersClick,
+  handleReviewsClick,
+  restaurantIsClicked,
+  usersIsClicked,
+  reviewsIsClicked,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [createClicked, setCreateClicked] = useState(false);
@@ -38,11 +42,11 @@ export default function BetterProfile({
             >
               <li
                 className="cursor-pointer"
-                onClick={() => setCurrentProfilePage(<ReviewCard />)}
+                onClick={() => handleReviewsClick()}
               >
                 <a
                   className={classNames(
-                    currentProfilePage.type.name === "ReviewCard"
+                    reviewsIsClicked
                       ? "bg-gray-50 text-amber-500"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-500",
                     "group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold leading-6"
@@ -51,7 +55,7 @@ export default function BetterProfile({
                   <ChatBubbleBottomCenterIcon
                     aria-hidden="true"
                     className={classNames(
-                      currentProfilePage.type.name === "ReviewCard"
+                      reviewsIsClicked
                         ? "text-amber-500"
                         : "text-gray-400 group-hover:text-amber-600",
                       "h-6 w-6 shrink-0"
@@ -62,11 +66,11 @@ export default function BetterProfile({
               </li>
               <li
                 className="cursor-pointer"
-                onClick={() => setCurrentProfilePage(<RestaurantCard />)}
+                onClick={() => handleRestaurantClick()}
               >
                 <a
                   className={classNames(
-                    currentProfilePage.type.name === "RestaurantCard"
+                    restaurantIsClicked
                       ? "bg-gray-50 text-amber-500"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-500",
                     "group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold leading-6"
@@ -75,7 +79,7 @@ export default function BetterProfile({
                   <BuildingStorefrontIcon
                     aria-hidden="true"
                     className={classNames(
-                      currentProfilePage.type.name === "RestaurantCard"
+                      restaurantIsClicked
                         ? "text-amber-500"
                         : "text-gray-400 group-hover:text-amber-600",
                       "h-6 w-6 shrink-0"
@@ -84,13 +88,10 @@ export default function BetterProfile({
                   Restaurants
                 </a>
               </li>
-              <li
-                className="cursor-pointer"
-                onClick={() => setCurrentProfilePage(<BetterEditProfile />)}
-              >
+              <li className="cursor-pointer" onClick={() => handleUsersClick()}>
                 <a
                   className={classNames(
-                    currentProfilePage.type.name === "BetterEditProfile"
+                    usersIsClicked
                       ? "bg-gray-50 text-amber-500"
                       : "text-gray-700 hover:bg-gray-50 hover:text-amber-500",
                     "group flex gap-x-3 rounded-md py-2 pl-2 pr-3 text-sm font-semibold leading-6"
@@ -99,7 +100,7 @@ export default function BetterProfile({
                   <UserIcon
                     aria-hidden="true"
                     className={classNames(
-                      currentProfilePage.type.name === "BetterEditProfile"
+                      usersIsClicked
                         ? "text-amber-500"
                         : "text-gray-400 group-hover:text-amber-600",
                       "h-6 w-6 shrink-0"
@@ -112,7 +113,7 @@ export default function BetterProfile({
           </nav>
         </aside>
         <main className="px-4 py-16 sm:px-6 lg:flex-auto lg:px-0 lg:py-20">
-          {currentProfilePage.type.name === "RestaurantCard" && (
+          {restaurantIsClicked && (
             <>
               {createClicked && (
                 <ModalRestaurant
@@ -142,7 +143,7 @@ export default function BetterProfile({
               </div>
             </>
           )}
-          {currentProfilePage.type.name === "ReviewCard" && (
+          {reviewsIsClicked && (
             <div className="bg-white lg:py-10 md:py-6 py-3">
               <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:max-w-4xl">
@@ -161,9 +162,7 @@ export default function BetterProfile({
               </div>
             </div>
           )}{" "}
-          {currentProfilePage.type.name === "BetterEditProfile" && (
-            <BetterEditProfile user={user} />
-          )}
+          {usersIsClicked && <BetterEditProfile user={user} />}
         </main>
       </div>
     </>

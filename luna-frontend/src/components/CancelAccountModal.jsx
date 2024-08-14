@@ -15,19 +15,16 @@ function CancelAccountModal({ setCancelButton }) {
 
   async function deleteUser() {
     try {
-      const res = await fetch(
-        `https://picky-70o0.onrender.com/api/v1/users/deleteMe`,
-        {
-          method: "DELETE",
+      const res = await fetch(`/users/deleteMe`, {
+        method: "DELETE",
 
-          body: null,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
-      );
+        body: null,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
       if (res.ok) {
         window.localStorage.clear();
         navigate("/login");

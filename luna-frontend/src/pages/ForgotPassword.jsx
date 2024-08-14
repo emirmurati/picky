@@ -3,19 +3,16 @@ import Input from "../components/Input";
 import { useMutation } from "@tanstack/react-query";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/img/pickyy.png";
+import API from "../../axios";
 
 function ForgotPassword() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (email) => {
-      await axios.post(
-        `https://picky-70o0.onrender.com/api/v1/auth/password-reset/`,
-        email
-      );
+      await API.post(`/auth/password-reset/`, email);
     },
     onSuccess: () => {
       toast.success("Great! another step before resetting the password ");

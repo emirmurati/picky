@@ -6,6 +6,7 @@ import axios from "axios";
 import Input from "../components/Input";
 import toast from "react-hot-toast";
 import Logo from "../assets/img/pickyy.png";
+import API from "../../axios";
 
 function LoginV2() {
   const navigate = useNavigate();
@@ -13,10 +14,7 @@ function LoginV2() {
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        "https://picky-70o0.onrender.com/api/v1/users/login",
-        obj
-      );
+      const res = await API.post("/users/login", obj);
 
       const token = res.data.token;
 

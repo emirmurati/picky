@@ -1,21 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from 'react-router-dom';
 import Loader from "../components/Loader";
-import axios from "axios";
 import Input from "../components/Input";
 import SuccessRegistration from "../components/SuccessRegistration";
 import Logo from "../assets/img/pickyy.png";
+import API from "../../axios";
 
 function Registration() {
   // const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        `https://picky-70o0.onrender.com/api/v1/users/signup`,
-        obj
-      );
+      const res = await API.post(`/users/signup`, obj);
 
       return res.data;
     },

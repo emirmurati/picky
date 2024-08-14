@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import Input from "../components/Input";
-import axios from "axios";
+import API from "../../axios";
 
 function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
   const token = window.localStorage.getItem("token");
@@ -12,16 +12,12 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
   const { register, handleSubmit } = useForm();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        `https://picky-70o0.onrender.com/api/v1/restaurant`,
-        obj,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await API.post(`/restaurant`, obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return res.data;
     },

@@ -3,9 +3,9 @@ import { useState } from "react";
 import CancelAccountModal from "./CancelAccountModal";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
+import API from "../../axios";
 
 export default function BetterEditProfile({ user }) {
   const [cancelButton, setCancelButton] = useState(false);
@@ -14,16 +14,12 @@ export default function BetterEditProfile({ user }) {
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.patch(
-        `https://picky-70o0.onrender.com/api/v1/users/updateMe`,
-        obj,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await API.patch(`/users/updateMe`, obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return res.data;
     },

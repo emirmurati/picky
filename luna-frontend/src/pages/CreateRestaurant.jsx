@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import API from "../../axios";
 
 function CreateRestaurant({ user }) {
   const token = window.localStorage.getItem("token");
@@ -13,16 +13,12 @@ function CreateRestaurant({ user }) {
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        `https://picky-70o0.onrender.com/api/v1/restaurant`,
-        obj,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await API.post(`/restaurant`, obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return res.data;
     },
@@ -37,6 +33,7 @@ function CreateRestaurant({ user }) {
       toast.error("Something went wrong :(");
     },
   });
+  console.log(error);
 
   function onSubmit(data) {
     // mutate({ ...data, image: data?.image[0] });

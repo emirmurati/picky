@@ -39,7 +39,11 @@ const solutions = [
   },
 ];
 
-export default function SearchMenu({ setCurrentPage }) {
+export default function SearchMenu({
+  handleReviewsClick,
+  handleUsersClick,
+  handleRestaurantClick,
+}) {
   return (
     <Popover className="relative flex justify-center">
       <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
@@ -55,7 +59,7 @@ export default function SearchMenu({ setCurrentPage }) {
           <div className="p-4 text-start">
             <>
               <div
-                onClick={() => setCurrentPage(<RestaurantCard />)}
+                onClick={() => handleRestaurantClick()}
                 className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 cursor-pointer"
               >
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -75,7 +79,7 @@ export default function SearchMenu({ setCurrentPage }) {
                 </div>
               </div>
               <div
-                onClick={() => setCurrentPage(<ReviewCard />)}
+                onClick={() => handleReviewsClick()}
                 className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 cursor-pointer "
               >
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -93,7 +97,7 @@ export default function SearchMenu({ setCurrentPage }) {
                 </div>
               </div>
               <div
-                onClick={() => setCurrentPage(<UserCard />)}
+                onClick={() => handleUsersClick()}
                 className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 cursor-pointer "
               >
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">

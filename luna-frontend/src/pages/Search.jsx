@@ -1,50 +1,75 @@
 import ReviewCard from "../components/ReviewCard";
 import UserCard from "../components/UserCard";
 import RestaurantCard from "../components/RestaurantCard";
-import { useState } from "react";
-import DropDown from "../components/DropDown";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import SearchMenu from "../components/SearchMenu";
+import API from "../../axios";
+import Loader from "../components/Loader";
 
 function Search() {
-  const [currentPage, setCurrentPage] = useState(<RestaurantCard />);
-  const { data: restaurants, isLoading } = useQuery({
+  const [restaurantIsClicked, setRestaurantIsClicked] = useState(false);
+  const [usersIsClicked, setUsersIsClicked] = useState(false);
+  const [reviewsIsClicked, setReviewsIsClicked] = useState(false);
+
+  const { data: restaurants, isLoading: restaurantLoading } = useQuery({
     queryKey: ["restaurants"],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://picky-70o0.onrender.com/api/v1/restaurant`
-      );
+      const res = await API.get(`/restaurant`);
 
       return res.data.data.data;
     },
   });
-  const { data: reviews } = useQuery({
+  const { data: reviews, isLoading: reviewLoading } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://picky-70o0.onrender.com/api/v1/review`
-      );
+      const res = await API.get(`/review`);
 
       return res.data.data.data;
     },
   });
-  const { data: users } = useQuery({
+  const { data: users, isLoading: usersLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://picky-70o0.onrender.com/api/v1/users`
-      );
+      const res = await API.get(`/users`);
 
       return res.data.data.data;
     },
   });
+
+  function handleRestaurantClick() {
+    setRestaurantIsClicked(true);
+    setReviewsIsClicked(false);
+    setUsersIsClicked(false);
+  }
+  function handleUsersClick() {
+    setUsersIsClicked(true);
+    setRestaurantIsClicked(false);
+    setReviewsIsClicked(false);
+  }
+  function handleReviewsClick() {
+    setReviewsIsClicked(true);
+    setUsersIsClicked(false);
+    setRestaurantIsClicked(false);
+  }
+
+  useEffect(() => {
+    setRestaurantIsClicked(true);
+  }, []);
+
+  if (restaurantLoading) return <Loader />;
+  if (reviewLoading) return <Loader />;
+  if (usersLoading) return <Loader />;
 
   return (
     <>
-      <SearchMenu setCurrentPage={setCurrentPage} />
+      <SearchMenu
+        handleRestaurantClick={handleRestaurantClick}
+        handleUsersClick={handleUsersClick}
+        handleReviewsClick={handleReviewsClick}
+      />
 
-      {currentPage.type.name === "RestaurantCard" && (
+      {restaurantIsClicked && (
         <div className="bg-white lg:py-10 md:py-6 py-3">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
@@ -57,13 +82,13 @@ function Search() {
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {restaurants?.map((restaurant, index) => (
-                <RestaurantCard restaurant={restaurant} isLoading={isLoading} />
+                <RestaurantCard restaurant={restaurant} />
               ))}
             </div>
           </div>
         </div>
       )}
-      {currentPage.type.name === "UserCard" && (
+      {usersIsClicked && (
         <div className="bg-white lg:py-10 md:py-6 py-3">
           <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
             <div className="mx-auto max-w-2xl">
@@ -79,14 +104,14 @@ function Search() {
               className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
             >
               {users?.map((user, index) => (
-                <UserCard user={user} isLoading={isLoading} />
+                <UserCard user={user} />
               ))}
             </ul>
           </div>
         </div>
       )}
 
-      {currentPage.type.name === "ReviewCard" && (
+      {reviewsIsClicked && (
         <div className="bg-white lg:py-10 md:py-6 py-3">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl lg:max-w-4xl">
@@ -98,7 +123,7 @@ function Search() {
               </p>
               <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
                 {reviews?.map((review, index) => (
-                  <ReviewCard review={review} isLoading={isLoading} />
+                  <ReviewCard review={review} />
                 ))}
               </div>
             </div>

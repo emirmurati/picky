@@ -6,16 +6,14 @@ import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/img/pickyy.png";
+import API from "../../axios";
 
 function NewPassword() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { mutate, isPending } = useMutation({
     mutationFn: async (obj) => {
-      await axios.patch(
-        `https://picky-70o0.onrender.com/api/v1//auth/password-reset/validation/`,
-        obj
-      );
+      await API.patch(`/auth/password-reset/validation/`, obj);
     },
     onSuccess: () => {
       toast.success("Great! You successfully changed your password! ");

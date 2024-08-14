@@ -15,9 +15,9 @@ import {
 } from "@heroicons/react/24/outline";
 import StarRating from "./StarRating";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import API from "../../axios";
 
 function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
   const { register, handleSubmit, setValue } = useForm();
@@ -27,10 +27,7 @@ function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        `https://picky-70o0.onrender.com/api/v1/review`,
-        obj
-      );
+      const res = await API.post(`/review`, obj);
 
       return res.data;
     },

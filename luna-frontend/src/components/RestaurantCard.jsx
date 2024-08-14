@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 
-function RestaurantCard({ restaurant, isLoading }) {
+function RestaurantCard({ restaurant }) {
   const navigate = useNavigate();
 
   function handleClick(id) {
