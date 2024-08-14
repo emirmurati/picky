@@ -18,7 +18,11 @@ function UserCard({ user }) {
     <li key={user?.firstName}>
       <img
         alt=""
-        src={user.avatar ? `http://localhost:8000/${user?.avatar}` : Avatar}
+        src={
+          user.avatar
+            ? `https://picky-70o0.onrender.com/${user?.avatar}`
+            : Avatar
+        }
         className="mx-auto h-56 w-56 rounded-full"
       />
       <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-gray-900">

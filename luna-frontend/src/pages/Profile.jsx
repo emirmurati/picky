@@ -12,12 +12,15 @@ function Profile() {
   const { data: user, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/users/me`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/users/me`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       return res.data.data.data;
     },
@@ -26,7 +29,7 @@ function Profile() {
     queryKey: ["restaurants"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/restaurant/getmyrestaurants/${user?._id}`
+        `https://picky-70o0.onrender.com/api/v1/restaurant/getmyrestaurants/${user?._id}`
       );
 
       return res.data.data.data;
@@ -36,7 +39,7 @@ function Profile() {
     queryKey: ["reviews"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/review/${user?._id}`
+        `https://picky-70o0.onrender.com/api/v1/review/${user?._id}`
       );
 
       return res.data.data.data;

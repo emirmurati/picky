@@ -12,7 +12,9 @@ function Search() {
   const { data: restaurants, isLoading } = useQuery({
     queryKey: ["restaurants"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/restaurant`);
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/restaurant`
+      );
 
       return res.data.data.data;
     },
@@ -20,7 +22,9 @@ function Search() {
   const { data: reviews } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/review`);
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/review`
+      );
 
       return res.data.data.data;
     },
@@ -28,7 +32,9 @@ function Search() {
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/users`);
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/users`
+      );
 
       return res.data.data.data;
     },

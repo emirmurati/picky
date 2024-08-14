@@ -13,7 +13,7 @@ function Registration() {
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: async (obj) => {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/users/signup`,
+        `https://picky-70o0.onrender.com/api/v1/users/signup`,
         obj
       );
 

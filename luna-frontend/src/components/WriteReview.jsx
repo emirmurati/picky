@@ -27,7 +27,10 @@ function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(`http://localhost:8000/api/v1/review`, obj);
+      const res = await axios.post(
+        `https://picky-70o0.onrender.com/api/v1/review`,
+        obj
+      );
 
       return res.data;
     },

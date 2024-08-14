@@ -20,7 +20,7 @@ function RestaurantPage() {
     queryKey: ["restaurant"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:8000/api/v1/restaurant/${restaurantId}`
+        `https://picky-70o0.onrender.com/api/v1/restaurant/${restaurantId}`
       );
 
       return res.data.data.data;
@@ -29,9 +29,12 @@ function RestaurantPage() {
   const { data: user } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/users/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/users/me`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       return res.data.data.data;
     },
@@ -39,7 +42,9 @@ function RestaurantPage() {
   const { data: reviewss } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/api/v1/review`);
+      const res = await axios.get(
+        `https://picky-70o0.onrender.com/api/v1/review`
+      );
 
       return res.data.data.data;
     },
@@ -69,7 +74,7 @@ function RestaurantPage() {
           <div className="lg:col-span-4 lg:row-end-1 md:flex md:justify-center">
             <div className="aspect-h-4 aspect-w-5 overflow-hidden rounded-lg bg-gray-100 md:w-fit md:place-content-centercenter">
               <img
-                src={`http://localhost:8000/${restaurant?.image}`}
+                src={`https://picky-70o0.onrender.com/${restaurant?.image}`}
                 className="object-cover  w-full "
               />
             </div>
@@ -149,7 +154,7 @@ function RestaurantPage() {
                         <div className="flex-none py-10">
                           <img
                             alt=""
-                            src={`http://localhost:8000/${review?.user?.avatar}`}
+                            src={`https://picky-70o0.onrender.com/${review?.user?.avatar}`}
                             className="h-10 w-10 rounded-full bg-gray-100"
                           />
                         </div>

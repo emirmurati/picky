@@ -18,7 +18,6 @@ const sendEmail = async (email, subject, text) => {
       to: email,
       subject: subject,
       text: text,
-      // html: "<a href='http://localhost:5173/login'>Go Back to Login</a>",
     });
     console.log("email sent sucessfully");
   } catch (error) {

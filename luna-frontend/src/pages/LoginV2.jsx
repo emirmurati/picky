@@ -14,7 +14,7 @@ function LoginV2() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (obj) => {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/users/login",
+        "https://picky-70o0.onrender.com/api/v1/users/login",
         obj
       );
 

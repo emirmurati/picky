@@ -13,7 +13,7 @@ function NewPassword() {
   const { mutate, isPending } = useMutation({
     mutationFn: async (obj) => {
       await axios.patch(
-        `http://localhost:8000/api/v1//auth/password-reset/validation/`,
+        `https://picky-70o0.onrender.com/api/v1//auth/password-reset/validation/`,
         obj
       );
     },

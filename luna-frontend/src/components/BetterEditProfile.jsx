@@ -15,7 +15,7 @@ export default function BetterEditProfile({ user }) {
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/users/updateMe`,
+        `https://picky-70o0.onrender.com/api/v1/users/updateMe`,
         obj,
         {
           headers: {
@@ -53,7 +53,7 @@ export default function BetterEditProfile({ user }) {
             <div>
               <img
                 className="object-cover object-center w-12 rounded-full"
-                src={`http://localhost:8000/${user?.avatar}`}
+                src={`https://picky-70o0.onrender.com/${user?.avatar}`}
               />
             </div>
           </div>

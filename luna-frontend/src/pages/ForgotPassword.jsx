@@ -13,7 +13,7 @@ function ForgotPassword() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (email) => {
       await axios.post(
-        `http://localhost:8000/api/v1/auth/password-reset/`,
+        `https://picky-70o0.onrender.com/api/v1/auth/password-reset/`,
         email
       );
     },

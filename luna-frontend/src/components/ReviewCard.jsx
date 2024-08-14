@@ -25,7 +25,7 @@ function ReviewCard({ review }) {
       >
         <img
           alt=""
-          src={`http://localhost:8000/${review?.restaurant?.image}`}
+          src={`https://picky-70o0.onrender.com/${review?.restaurant?.image}`}
           className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover "
         />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
@@ -70,7 +70,7 @@ function ReviewCard({ review }) {
           <div className="relative flex items-center gap-x-4">
             <img
               alt=""
-              src={`http://localhost:8000/${review?.user?.avatar}`}
+              src={`https://picky-70o0.onrender.com/${review?.user?.avatar}`}
               className="h-10 w-10 rounded-full bg-gray-50"
             />
             <div className="text-sm leading-6">
