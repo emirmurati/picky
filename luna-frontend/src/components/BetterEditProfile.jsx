@@ -14,12 +14,16 @@ export default function BetterEditProfile({ user }) {
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.patch(`/api/v1/users/updateMe`, obj, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.patch(
+        `http://localhost:8000/api/v1/users/updateMe`,
+        obj,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       return res.data;
     },
@@ -49,7 +53,7 @@ export default function BetterEditProfile({ user }) {
             <div>
               <img
                 className="object-cover object-center w-12 rounded-full"
-                src={`/${user?.avatar}`}
+                src={`http://localhost:8000/${user?.avatar}`}
               />
             </div>
           </div>

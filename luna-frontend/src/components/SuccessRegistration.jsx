@@ -8,7 +8,7 @@ function SuccessRegistration() {
   }
 
   return (
-    <div className="flex justify-start mt-14 lg:mt-24 md:mt-20  items-start">
+    <div className="flex justify-center mt-14 lg:mt-24 md:mt-20  items-start">
       <div className="flex flex-col items-center justify-start gap-y-9">
         <svg
           xmlns="http://www.w3.org/2000/svg"

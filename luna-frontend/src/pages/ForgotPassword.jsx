@@ -13,7 +13,7 @@ function ForgotPassword() {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (email) => {
       await axios.post(
-        `https://motion.propulsion-home.ch/backend/api/auth/password-reset/`,
+        `http://localhost:8000/api/v1/auth/password-reset/`,
         email
       );
     },

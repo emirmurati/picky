@@ -13,7 +13,7 @@ function NewPassword() {
   const { mutate, isPending } = useMutation({
     mutationFn: async (obj) => {
       await axios.patch(
-        `https://motion.propulsion-home.ch/backend/api/auth/password-reset/validation/`,
+        `http://localhost:8000/api/v1//auth/password-reset/validation/`,
         obj
       );
     },

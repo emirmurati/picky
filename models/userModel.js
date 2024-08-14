@@ -47,7 +47,7 @@ const userSchema = new Schema(
 
     avatar: {
       type: String,
-      default: "/Users/emirmurati/Downloads/avatar.jpeg",
+      default: "avatar.jpeg",
     },
     banner: {
       type: String,

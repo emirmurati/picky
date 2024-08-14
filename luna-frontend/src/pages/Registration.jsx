@@ -12,7 +12,10 @@ function Registration() {
   const { register, handleSubmit } = useForm();
   const { mutate, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(`/api/v1/users/signup`, obj);
+      const res = await axios.post(
+        `http://localhost:8000/api/v1/users/signup`,
+        obj
+      );
 
       return res.data;
     },
@@ -51,6 +54,7 @@ function Registration() {
                 EMAIL
               </Input>
             </div>
+
             {/* <Input htmlFor="code" type="text" register={register} name="code">
             CODE
           </Input> */}

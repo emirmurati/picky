@@ -19,7 +19,7 @@ function RestaurantCard({ restaurant, isLoading }) {
     >
       <img
         alt=""
-        src={`/${restaurant?.image}`}
+        src={`http://localhost:8000/${restaurant?.image}`}
         className="absolute inset-0 -z-10 h-full w-full object-cover "
       />
 

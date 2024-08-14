@@ -19,7 +19,9 @@ function RestaurantPage() {
   const { data: restaurant, isLoading } = useQuery({
     queryKey: ["restaurant"],
     queryFn: async () => {
-      const res = await axios.get(`/api/v1/restaurant/${restaurantId}`);
+      const res = await axios.get(
+        `http://localhost:8000/api/v1/restaurant/${restaurantId}`
+      );
 
       return res.data.data.data;
     },
@@ -27,7 +29,7 @@ function RestaurantPage() {
   const { data: user } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get(`/api/v1/users/me`, {
+      const res = await axios.get(`http://localhost:8000/api/v1/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -37,7 +39,7 @@ function RestaurantPage() {
   const { data: reviewss } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axios.get(`/api/v1/review`);
+      const res = await axios.get(`http://localhost:8000/api/v1/review`);
 
       return res.data.data.data;
     },
@@ -67,7 +69,7 @@ function RestaurantPage() {
           <div className="lg:col-span-4 lg:row-end-1 md:flex md:justify-center">
             <div className="aspect-h-4 aspect-w-5 overflow-hidden rounded-lg bg-gray-100 md:w-fit md:place-content-centercenter">
               <img
-                src={`/${restaurant?.image}`}
+                src={`http://localhost:8000/${restaurant?.image}`}
                 className="object-cover  w-full "
               />
             </div>
@@ -147,7 +149,7 @@ function RestaurantPage() {
                         <div className="flex-none py-10">
                           <img
                             alt=""
-                            src={`/${review?.user?.avatar}`}
+                            src={`http://localhost:8000/${review?.user?.avatar}`}
                             className="h-10 w-10 rounded-full bg-gray-100"
                           />
                         </div>
@@ -200,140 +202,6 @@ function RestaurantPage() {
         </div>
       </div>
     </div>
-    // <>
-    //   <div className="relative isolate h-2/6 w-full overflow-hidden bg-gradient-to-b from-black to-[#000000] py-24 sm:py-32">
-    //     <img
-    //       src="https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg"
-    //       alt=""
-    //       className="absolute inset-0 -z-10 h-full w-full object-cover object-right opacity-30 md:object-center"
-    //     />
-    //     <div>
-    //       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-    //         <div className="mx-auto max-w-2xl lg:mx-0"></div>
-    //         <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none"></div>
-    //       </div>
-    //     </div>
-    //     <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 transform">
-    //       <div className="flex items-center justify-around">
-    //         <div>
-    //           <h2 className="pb-3 text-3xl text-white">%RESTAURANT NAME%</h2>
-    //           <p className="text-md pb-2 text-white">%RESTAURANT PRODUCT%</p>
-    //           <div className="flex gap-4">
-    //             <p className="text-white">%STAR% </p>
-    //             <p className="italic text-white">%NUMBER REVIEWS% reviews</p>
-    //           </div>
-    //         </div>
-    //         <div className="w-64">
-    //           <img src="https://mtec.ethz.ch/the-department/how-to-find-us/_jcr_content/par/fullwidthimage/image.imageformat.930.73662141.png" />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   {isReviewButtonClicked ? (
-    //     <WriteReview setIsReviewButtonClicked={setIsReviewButtonClicked} />
-    //   ) : (
-    //     <div className="mt-8 flex justify-center">
-    //       <div className="flex w-5/6 justify-between gap-24">
-    //         <div className="flex justify-end">
-    //           <div className="w-1/2">
-    //             <div className="flex-col">
-    //               <div className="mb-8 flex w-full text-3xl">
-    //                 <input
-    //                   className="h-8 w-full rounded-md px-2 text-base"
-    //                   type="text"
-    //                   placeholder="Filter List..."
-    //                 />
-    //                 <button className="rounded-md bg-amber-500 px-6 py-1 text-base text-gray-50 hover:bg-amber-600">
-    //                   Filter
-    //                 </button>
-    //               </div>
-    //             </div>
-    //             <div className="group w-full border-t-4 border-amber-500 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-    //               <div className="flex justify-between border-b-2 border-b-slate-200">
-    //                 <div className="flex gap-4">
-    //                   <div className="aspect-h-1 aspect-w-1 lg:aspect-none w-28 overflow-hidden bg-gray-200">
-    //                     <img
-    //                       src="src/assets/img/244b33a5c8d738c298296d73d0d840348799e37f.png"
-    //                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-    //                     />
-    //                   </div>
-    //                   <div>
-    //                     <div className="flex-col py-2">
-    //                       <h3 className="text-sm text-amber-500">Name</h3>
-    //                       <p>Total REviews Total Reviews</p>
-    //                     </div>
-    //                   </div>
-    //                   <div className="flex items-center">
-    //                     <button>
-    //                       <img src="src/assets/svg/star.svg" />
-    //                     </button>
-    //                   </div>
-    //                 </div>
-    //                 <p className="px-8">DATE</p>
-    //               </div>
-    //               <div className="p-2">
-    //                 <p className="mt-1 text-sm text-amber-500">Restaurant</p>
-    //                 <p className="mb-2">
-    //                   Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-    //                   Distinctio totam obcaecati doloremque ipsam. Iusto
-    //                   quisquam dolores, explicabo sed soluta nostrum dolor
-    //                   ratione omnis corrupti ea!
-    //                 </p>
-    //                 <div className="flex items-center justify-between">
-    //                   <div className="flex">
-    //                     <button className="flex items-center gap-2 rounded-l-lg border-r-2 border-r-white bg-slate-400 px-3 py-0.5 text-white hover:bg-slate-500">
-    //                       <img src="src/assets/svg/money.svg" />
-    //                       <p>Total Likes Likes</p>
-    //                     </button>
-
-    //                     <button className="flex items-center gap-2 rounded-r-lg bg-slate-400 px-3 py-0.5 text-white hover:bg-slate-500">
-    //                       <p>Comments Total comments</p>
-    //                     </button>
-    //                   </div>
-    //                   <button
-    //                     onClick={() => setIsClicked((prev) => !prev)}
-    //                     className="cursor-pointer text-amber-500 hover:text-amber-600"
-    //                   >
-    //                     {isClicked ? 'Hide' : 'View all comments'}
-    //                   </button>
-    //                 </div>
-    //                 {isClicked && (
-    //                   <>
-    //                     <p className="text-amber-500">Cristiano Ronaldo</p>
-    //                     <p>I love it</p>
-    //                     <p className="text-amber-500">Ruben Villalon</p>
-    //                     <p>Crazyyyy</p>
-    //                   </>
-    //                 )}
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //         <div className="w-1/2">
-    //           <div className="flex border-b-2 border-b-slate-200 pb-4">
-    //             <img src="src/assets/svg/clock.svg" className="pr-3" />
-    //             <p>Monday Friday 8 am to 9 pm</p>
-    //           </div>
-    //           <div className="flex pt-4">
-    //             <img src="src/assets/svg/money.svg" className="pr-3" />
-    //             <p>Price level: $$$</p>
-    //           </div>
-    //           <div className="flex justify-center gap-3 pt-8">
-    //             <button
-    //               onClick={() => setIsReviewButtonClicked((prev) => !prev)}
-    //               className="cursor-pointer rounded-xl bg-amber-500 px-4 py-2 text-white hover:bg-amber-600"
-    //             >
-    //               WRITE A REVIEW
-    //             </button>
-    //             <button className="cursor-pointer rounded-xl bg-amber-500 px-4 py-2 text-white hover:bg-amber-600">
-    //               EDIT DATA
-    //             </button>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </>
   );
 }
 

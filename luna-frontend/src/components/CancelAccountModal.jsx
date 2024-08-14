@@ -1,35 +1,33 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-} from '@headlessui/react';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+} from "@headlessui/react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 function CancelAccountModal({ setCancelButton }) {
   const navigate = useNavigate();
-  const token = window.localStorage.getItem('token');
+  const token = window.localStorage.getItem("token");
+
   async function deleteUser() {
     try {
-      const res = await fetch(
-        `https://motion.propulsion-home.ch/backend/api/users/me/`,
-        {
-          method: 'DELETE',
+      const res = await fetch(`http://localhost:8000/api/v1/users/deleteMe`, {
+        method: "DELETE",
 
-          body: null,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
+        body: null,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
-      );
+      });
       if (res.ok) {
         window.localStorage.clear();
-        navigate('/signup');
+        navigate("/login");
       } else {
         throw Error;
       }
@@ -40,7 +38,14 @@ function CancelAccountModal({ setCancelButton }) {
 
   const [open, setOpen] = useState(true);
   return (
-    <Dialog className="relative z-10" open={open} onClose={setOpen}>
+    <Dialog
+      className="relative z-10"
+      open={open}
+      onClose={() => {
+        setOpen(false);
+        setCancelButton(false);
+      }}
+    >
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
@@ -77,6 +82,7 @@ function CancelAccountModal({ setCancelButton }) {
                 </div>
               </div>
             </div>
+
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
