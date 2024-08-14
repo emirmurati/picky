@@ -13,10 +13,7 @@ function LoginV2() {
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/users/login",
-        obj
-      );
+      const res = await axios.post("/api/v1/users/login", obj);
 
       const token = res.data.token;
 

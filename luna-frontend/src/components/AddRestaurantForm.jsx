@@ -12,16 +12,12 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
   const { register, handleSubmit } = useForm();
   const { mutate, isPending, error } = useMutation({
     mutationFn: async (obj) => {
-      const res = await axios.post(
-        `http://localhost:8000/api/v1/restaurant`,
-        obj,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post(`/api/v1/restaurant`, obj, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       return res.data;
     },
@@ -39,7 +35,6 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
   });
 
   function onSubmit(data) {
-    
     mutate({ ...data, image: data?.image[0] });
     // mutate({ ...data, image: data?.image[0] });
     // mutate(data);
