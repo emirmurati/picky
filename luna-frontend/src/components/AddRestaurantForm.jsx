@@ -40,7 +40,7 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
     // mutate(data);
   }
 
-  // if (isPending) return <Loader />;
+  if (isPending) return <Loader />;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

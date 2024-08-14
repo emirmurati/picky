@@ -113,7 +113,7 @@ function RestaurantPage() {
               Price level: {restaurant?.priceLevel}
             </p>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-              {user?._id === restaurant?.user?._id ? null : (
+              {user?._id === restaurant?.user?._id && !token ? null : (
                 <button
                   onClick={() => setIsReviewButtonClicked((prev) => !prev)}
                   type="button"
