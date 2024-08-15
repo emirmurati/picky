@@ -5,6 +5,9 @@
 <p id="description">A web application that allows users to discover nearby restaurants read and write reviews and create their own restaurant listings. Perfect for food enthusiasts looking to explore new dining options and share their experiences with others</p>
 
 <h2>🚀 Demo</h2>
+<p>Email: wanam21939@polatrix.com</p>
+
+<p>Password: test1234</p>
 
 <a href="https://picky-rho.vercel.app/">Click here for the demo </a>
 
