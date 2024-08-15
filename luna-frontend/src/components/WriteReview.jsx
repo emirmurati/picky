@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import API from "../../axios";
 
 function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
+  const token = window.localStorage.getItem("token");
   const { register, handleSubmit, setValue } = useForm();
 
   const [open, setOpen] = useState(true);
@@ -83,12 +84,15 @@ function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
                   />
                 </div>
                 <div className="mt-3 text-center sm:mt-5">
-                  <DialogTitle
-                    as="h3"
-                    className="text-base font-semibold leading-6 text-gray-900"
-                  >
-                    Write a review
-                  </DialogTitle>
+                  {token ? (
+                    <DialogTitle
+                      as="h3"
+                      className="text-base font-semibold leading-6 text-gray-900"
+                    >
+                      Write a review
+                    </DialogTitle>
+                  ) : null}
+
                   <div className="flex items-center gap-x-3 mt-2">
                     <StarRating
                       maxRating={5}
