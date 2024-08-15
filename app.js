@@ -1,8 +1,14 @@
-import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 import dotenv from "dotenv";
 
 import cors from "cors";
 import express from "express";
+import path from "path";
 import globalErrorHandler from "./controllers/errorController.js";
 import userRoute from "./routes/userRoute.js";
 import restaurantRoute from "./routes/restaurantRoute.js";
@@ -12,9 +18,8 @@ import commentRoute from "./routes/commentRoute.js";
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 app.use(express.static("public/img/users"));
-app.use(express.static("public/img/restaurant"));
+app.use(express.json());
 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/restaurant", restaurantRoute);
