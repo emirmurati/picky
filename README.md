@@ -9,7 +9,7 @@
 
 <p>Password: test1234</p>
 
-<a href="https://picky-rho.vercel.app/" target="_blank">Click here for the demo </a>
+<a href="https://picky-lovat.vercel.app/" target="_blank">Click here for the demo </a>
 
 <h2>Project Screenshots:</h2>
 
