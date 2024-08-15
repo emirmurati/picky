@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://picky-i45hmd6dx-emirmuratis-projects.vercel.app/](https://picky-i45hmd6dx-emirmuratis-projects.vercel.app/)
+<a href="https://picky-rho.vercel.app/">Click here for the demo </a>
 
 <h2>Project Screenshots:</h2>
 
