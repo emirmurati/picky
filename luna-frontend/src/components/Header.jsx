@@ -58,16 +58,16 @@ function Header() {
           {!token ? (
             <>
               <NavLink
-                to="/login"
+                to="/signup"
                 className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
               >
-                Log in
+                Sign up
               </NavLink>
               <Link
-                to="/signup"
+                to="/login"
                 className="rounded-md bg-amber-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500"
               >
-                Sign up
+                Login
               </Link>
             </>
           ) : (
@@ -109,10 +109,10 @@ function Header() {
             {!token ? (
               <Link
                 onClick={() => setMobileMenuOpen(false)}
-                to="/signup"
+                to="/login"
                 className="ml-auto rounded-md bg-amber-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500"
               >
-                Sign up
+                Log in
               </Link>
             ) : null}
 
@@ -154,10 +154,10 @@ function Header() {
                 {!token ? (
                   <Link
                     onClick={() => setMobileMenuOpen(false)}
-                    to="/login"
+                    to="/signup"
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
+                    Sign up
                   </Link>
                 ) : (
                   <Link
