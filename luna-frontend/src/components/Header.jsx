@@ -30,7 +30,12 @@ function Header() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img alt="" src={Logo} className="h-14" />
+            <img
+              alt=""
+              src={Logo}
+              className="h-14 cursor-pointer"
+              onClick={() => navigate("/")}
+            />
           </a>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">

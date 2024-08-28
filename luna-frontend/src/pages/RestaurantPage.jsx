@@ -68,7 +68,7 @@ function RestaurantPage() {
           <div className="lg:col-span-4 lg:row-end-1 md:flex md:justify-center">
             <div className="aspect-h-4 aspect-w-5 overflow-hidden rounded-lg bg-gray-100 md:w-fit md:place-content-centercenter">
               <img
-                src={`https://picky-70o0.onrender.com/${restaurant?.image}`}
+                src={`https://picky-70o0.onrender.com/images/${restaurant?.image}`}
                 className="object-cover  w-full "
               />
             </div>
@@ -148,7 +148,7 @@ function RestaurantPage() {
                         <div className="flex-none py-10">
                           <img
                             alt=""
-                            src={`https://picky-70o0.onrender.com/${review?.user?.avatar}`}
+                            src={`https://picky-70o0.onrender.com/images/${review?.user?.avatar}`}
                             className="h-10 w-10 rounded-full bg-gray-100"
                           />
                         </div>

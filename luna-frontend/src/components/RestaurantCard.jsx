@@ -19,7 +19,7 @@ function RestaurantCard({ restaurant }) {
     >
       <img
         alt=""
-        src={`https://picky-70o0.onrender.com/${restaurant?.image}`}
+        src={`https://picky-70o0.onrender.com/images/${restaurant?.image}`}
         className="absolute inset-0 -z-10 h-full w-full object-cover "
       />
 

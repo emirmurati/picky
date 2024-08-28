@@ -20,7 +20,7 @@ function UserCard({ user }) {
         alt=""
         src={
           user.avatar
-            ? `https://picky-70o0.onrender.com/${user?.avatar}`
+            ? `https://picky-70o0.onrender.com/images/${user?.avatar}`
             : Avatar
         }
         className="mx-auto h-56 w-56 rounded-full"

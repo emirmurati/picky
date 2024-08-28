@@ -37,6 +37,7 @@ export default function BetterEditProfile({ user }) {
   function onSubmit(data) {
     mutate({ ...data, avatar: data?.avatar[0] });
   }
+  console.log(error);
   if (isPending) return <Loader />;
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -49,7 +50,7 @@ export default function BetterEditProfile({ user }) {
             <div>
               <img
                 className="object-cover object-center w-12 rounded-full"
-                src={`https://picky-70o0.onrender.com/${user?.avatar}`}
+                src={`https://picky-70o0.onrender.com/images/${user?.avatar}`}
               />
             </div>
           </div>

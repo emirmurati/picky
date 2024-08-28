@@ -16,10 +16,16 @@ import reviewRoute from "./routes/reviewRoute.js";
 import commentRoute from "./routes/commentRoute.js";
 
 const app = express();
+// const corsOptions = {
+//   origin: "https://picky-lovat.vercel.app", // Your Vercel client domain
+//   optionsSuccessStatus: 200,
+// };
 
 app.use(cors());
-app.use(express.static("public/img/users"));
+// app.use(express.static("public/img/users"));
+
 app.use(express.json());
+app.use("/images", express.static(path.join("/var/www/myapp/images")));
 
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/restaurant", restaurantRoute);
