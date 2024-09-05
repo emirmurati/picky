@@ -1,49 +1,22 @@
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
-import {
-  ArrowPathIcon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
   ChatBubbleBottomCenterIcon,
   UsersIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline";
-import ReviewCard from "./ReviewCard";
-import RestaurantCard from "./RestaurantCard";
-import UserCard from "./UserCard";
 
-const solutions = [
-  {
-    name: "Restaurants",
-    description: "Search for all the restaurants",
-    href: "#",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Reviews",
-    description: "Search for reviews",
-    href: "#",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Users",
-    description: "Search for all active users",
-    href: "#",
-    icon: FingerPrintIcon,
-  },
-];
+interface SearchMenuProp {
+  handleReviewsClick: () => void;
+  handleUsersClick: () => void;
+  handleRestaurantClick: () => void;
+}
 
 export default function SearchMenu({
   handleReviewsClick,
   handleUsersClick,
   handleRestaurantClick,
-}) {
+}: SearchMenuProp) {
   return (
     <Popover className="relative flex justify-center">
       <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">

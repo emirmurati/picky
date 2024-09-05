@@ -1,4 +1,15 @@
 /* eslint-disable react/prop-types */
+import { UseFormRegister } from "react-hook-form";
+interface InputType {
+  register: UseFormRegister<any>;
+  children: React.ReactNode;
+  htmlFor: string;
+  type: string;
+  name: string;
+  value?: string;
+  defaultValue?: string;
+  isRequired?: boolean;
+}
 function Input({
   register,
   children,
@@ -7,7 +18,7 @@ function Input({
   name,
   value,
   defaultValue,
-}) {
+}: InputType) {
   return (
     <div>
       <label

@@ -4,7 +4,12 @@ import { useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import AddRestaurantForm from "./AddRestaurantForm";
 
-function ModalRestaurant({ setCreateClicked, user }) {
+interface ModalRestaurantProps {
+  user: { id: string };
+  setCreateClicked: (arg: boolean) => void;
+}
+
+function ModalRestaurant({ setCreateClicked, user }: ModalRestaurantProps) {
   const [open, setOpen] = useState(true);
 
   return (

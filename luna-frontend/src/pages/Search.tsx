@@ -1,11 +1,23 @@
-import ReviewCard from "../components/ReviewCard";
-import UserCard from "../components/UserCard";
+import ReviewCard, { ReviewCardProp } from "../components/ReviewCard";
+import UserCard, { UserCardProp } from "../components/UserCard";
 import RestaurantCard from "../components/RestaurantCard";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import SearchMenu from "../components/SearchMenu";
 import API from "../../axios";
 import Loader from "../components/Loader";
+import { RestaurantType } from "../lib/GlobalTypes";
+
+interface reviewTypeSearch {
+  comments?: string[];
+  content: string;
+  _id: string;
+  likes: number;
+  rating: number;
+  restaurant: { _id: string; image: string; name: string };
+  user: { firstName: string; lastName: string; avatar: string };
+  createdAt: string;
+}
 
 function Search() {
   const [restaurantIsClicked, setRestaurantIsClicked] = useState(false);
@@ -36,6 +48,7 @@ function Search() {
       return res.data.data.data;
     },
   });
+  console.log(users);
 
   function handleRestaurantClick() {
     setRestaurantIsClicked(true);
@@ -81,7 +94,7 @@ function Search() {
               </p>
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-              {restaurants?.map((restaurant, index) => (
+              {restaurants?.map((restaurant: RestaurantType) => (
                 <RestaurantCard restaurant={restaurant} />
               ))}
             </div>
@@ -103,9 +116,14 @@ function Search() {
               role="list"
               className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
             >
-              {users?.map((user, index) => (
-                <UserCard user={user} />
-              ))}
+              {users?.map(
+                (user: {
+                  description: string;
+                  avatar: string;
+                  firstName: string;
+                  lastName: string;
+                }) => <UserCard user={user} />
+              )}
             </ul>
           </div>
         </div>
@@ -122,7 +140,7 @@ function Search() {
                 Reviews on restaurants
               </p>
               <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
-                {reviews?.map((review, index) => (
+                {reviews?.map((review: reviewTypeSearch) => (
                   <ReviewCard review={review} />
                 ))}
               </div>
