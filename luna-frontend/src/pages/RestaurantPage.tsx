@@ -5,19 +5,29 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import API from "../../axios";
 
-function classNames(...classes) {
+interface ReviewType {
+  _id: string;
+  user: {
+    avatar: string;
+    firstName: string;
+    lastName: string;
+  };
+  content: string;
+  rating: number;
+  createdAt: string;
+}
+
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 function RestaurantPage() {
   const token = window.localStorage.getItem("token");
   const { restaurantId } = useParams();
-  const [isClicked, setIsClicked] = useState(false);
   const [isReviewButtonClicked, setIsReviewButtonClicked] = useState(false);
-  const { data: restaurant, isLoading } = useQuery({
+  const { data: restaurant } = useQuery({
     queryKey: ["restaurant"],
     queryFn: async () => {
       const res = await API.get(`/restaurant/${restaurantId}`);
@@ -45,11 +55,14 @@ function RestaurantPage() {
   });
 
   let average = reviewss
-    ?.filter((revie) => revie?.restaurant?._id === restaurantId)
-    .map((review) => review.rating);
+    ?.filter(
+      (revie: { restaurant: { _id: string } }) =>
+        revie?.restaurant?._id === restaurantId
+    )
+    .map((review: { rating: number }) => review.rating);
 
   const newAvg = average?.length
-    ? average.reduce((a, b) => a + b) / average.length
+    ? average.reduce((a: number, b: number) => a + b) / average.length
     : null;
 
   return (
@@ -91,8 +104,11 @@ function RestaurantPage() {
                       key={rating}
                       aria-hidden="true"
                       className={classNames(
-                        newAvg > rating ? "text-yellow-400" : "text-gray-300",
-                        "h-5 w-5 flex-shrink-0"
+                        typeof newAvg === "number"
+                          ? newAvg > rating
+                            ? "text-yellow-400 h-5 w-5 flex-shrink-0"
+                            : "text-gray-300 h-5 w-5 flex-shrink-0"
+                          : ""
                       )}
                     />
                   ))}
@@ -139,8 +155,11 @@ function RestaurantPage() {
                   <h3 className="sr-only">Customer Reviews</h3>
 
                   {reviewss
-                    ?.filter((revie) => revie?.restaurant?._id === restaurantId)
-                    .map((review, reviewIdx) => (
+                    ?.filter(
+                      (revie: { restaurant: { _id: string } }) =>
+                        revie?.restaurant?._id === restaurantId
+                    )
+                    .map((review: ReviewType, reviewIdx: number) => (
                       <div
                         key={review._id}
                         className="flex space-x-4 text-sm text-gray-500"

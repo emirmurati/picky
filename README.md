@@ -15,23 +15,18 @@
 
 ![Screenshot 2024-08-15 alle 00 24 49](https://github.com/user-attachments/assets/48f8f6f6-48af-4c63-ab45-ab5175511e90)
 
-
-  
-  
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
 
-*   User Reviews and Ratings: Read and write reviews for restaurants.
-*   Restaurant Discovery: Find restaurants near by.
-*   Create Restaurant Listings: Users can add and manage their own restaurant entries.
-*   Responsive Design: Optimized for use on both desktop and mobile devices.
+- User Reviews and Ratings: Read and write reviews for restaurants.
+- Restaurant Discovery: Find restaurants near by.
+- Create Restaurant Listings: Users can add and manage their own restaurant entries.
+- Responsive Design: Optimized for use on both desktop and mobile devices.
 
-  
-  
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
 
-*   Frontend: React Tailwind CSS React Query
-*   Backend: Node.js Express MongoDB Mongoose
+- Frontend: React Tailwind CSS React Query
+- Backend: Node Express MongoDB Mongoose

@@ -2,31 +2,45 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import {
-  CheckIcon,
-  ChatBubbleBottomCenterIcon,
-} from "@heroicons/react/24/outline";
+import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 import StarRating from "./StarRating";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Loader from "../components/Loader";
+import Loader from "./Loader";
 import toast from "react-hot-toast";
 import API from "../../axios";
 
-function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
-  const { register, handleSubmit, setValue } = useForm();
+interface WriteReviewProp {
+  setIsReviewButtonClicked: (arg: boolean) => void;
+  restaurantId: string | undefined;
+  userId: string;
+}
+
+interface WriteReviewAction {
+  content: string;
+  rating: number;
+  user: string;
+  restaurant: string;
+}
+
+function WriteReview({
+  setIsReviewButtonClicked,
+  restaurantId,
+  userId,
+}: WriteReviewProp) {
+  const { register, handleSubmit, setValue } = useForm<WriteReviewAction>();
 
   const [open, setOpen] = useState(true);
   const [rating, setRating] = useState(5);
   const queryClient = useQueryClient();
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: async (obj) => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (obj: WriteReviewAction) => {
       const res = await API.post(`/review`, obj);
 
       return res.data;
@@ -44,10 +58,9 @@ function WriteReview({ setIsReviewButtonClicked, restaurantId, userId }) {
     },
   });
 
-  function onSubmit(data) {
-    // mutate({ ...data, image: data?.image[0] });
+  const onSubmit: SubmitHandler<WriteReviewAction> = function (data) {
     mutate(data);
-  }
+  };
 
   useEffect(() => {
     setValue("rating", rating);

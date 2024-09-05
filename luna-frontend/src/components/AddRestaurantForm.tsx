@@ -2,16 +2,40 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Loader from "../components/Loader";
-import Input from "../components/Input";
+import Loader from "./Loader";
+import Input from "./Input";
 import API from "../../axios";
 
-function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
+interface RestaurantAdd {
+  name: string;
+  category: string;
+  country: string;
+  street: string;
+  city: string;
+  zip?: number;
+  phoneNumber: string;
+  openingHours?: string;
+  priceLevel?: string;
+  image: string;
+  user: string;
+}
+interface AddRestaurantFormProps {
+  setOpen: (arg: boolean) => void;
+  setCreateClicked: (arg: boolean) => void;
+  user: { id: string };
+  open: boolean;
+}
+
+function AddRestaurantForm({
+  setOpen,
+  setCreateClicked,
+  user,
+}: AddRestaurantFormProps): JSX.Element {
   const token = window.localStorage.getItem("token");
   const queryClient = useQueryClient();
-  const { register, handleSubmit } = useForm();
-  const { mutate, isPending, error } = useMutation({
-    mutationFn: async (obj) => {
+  const { register, handleSubmit } = useForm<RestaurantAdd>();
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (obj: RestaurantAdd) => {
       const res = await API.post(`/restaurant`, obj, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -34,10 +58,8 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
     },
   });
 
-  function onSubmit(data) {
+  function onSubmit(data: RestaurantAdd): void {
     mutate({ ...data, image: data?.image[0] });
-    // mutate({ ...data, image: data?.image[0] });
-    // mutate(data);
   }
 
   if (isPending) return <Loader />;
@@ -79,8 +101,8 @@ function AddRestaurantForm({ setOpen, setCreateClicked, open, user }) {
             </div>
             <input
               type="hidden"
-              name="user"
               {...register("user")}
+              name="user"
               value={user?.id}
             />
 

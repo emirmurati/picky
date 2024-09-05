@@ -6,13 +6,27 @@ import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import API from "../../axios";
 
-function CreateRestaurant({ user }) {
+interface CreateRestaurant {
+  name: string;
+  category: string;
+  country: string;
+  street: string;
+  city: string;
+  zip?: string;
+  phoneNumber: string;
+  openingHours?: string;
+  priceLevel?: string;
+  image: FileList;
+  user: string;
+}
+
+function CreateRestaurant() {
   const token = window.localStorage.getItem("token");
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<CreateRestaurant>();
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
-    mutationFn: async (obj) => {
+    mutationFn: async (obj: CreateRestaurant) => {
       const res = await API.post(`/restaurant`, obj, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -35,8 +49,7 @@ function CreateRestaurant({ user }) {
   });
   console.log(error);
 
-  function onSubmit(data) {
-    // mutate({ ...data, image: data?.image[0] });
+  function onSubmit(data: CreateRestaurant) {
     mutate(data);
   }
   if (isPending) return <Loader />;

@@ -10,9 +10,33 @@ import BetterEditProfile from "./BetterEditProfile";
 import RestaurantCard from "./RestaurantCard";
 import ReviewCard from "./ReviewCard";
 import ModalRestaurant from "./ModalRestaurant";
+import { RestaurantType, ReviewType, UserType } from "../lib/GlobalTypes";
 
-function classNames(...classes) {
+interface reviewTypeSearch {
+  comments?: string[];
+  content: string;
+  _id: string;
+  likes: number;
+  rating: number;
+  restaurant: { _id: string; image: string; name: string };
+  user: { firstName: string; lastName: string; avatar: string };
+  createdAt: string;
+}
+
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
+}
+
+interface ProfileProps {
+  user: UserType;
+  restaurants: RestaurantType[];
+  reviews: ReviewType[];
+  handleRestaurantClick: () => void;
+  handleUsersClick: () => void;
+  handleReviewsClick: () => void;
+  restaurantIsClicked: boolean;
+  usersIsClicked: boolean;
+  reviewsIsClicked: boolean;
 }
 
 export default function BetterProfile({
@@ -25,9 +49,11 @@ export default function BetterProfile({
   restaurantIsClicked,
   usersIsClicked,
   reviewsIsClicked,
-}) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [createClicked, setCreateClicked] = useState(false);
+}: ProfileProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [createClicked, setCreateClicked] = useState<boolean>(false);
+  console.log(restaurants);
+  console.log(reviews);
 
   return (
     <>
@@ -135,7 +161,7 @@ export default function BetterProfile({
                     </button>
                   </div>
                   <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-                    {restaurants?.map((restaurant, index) => (
+                    {restaurants?.map((restaurant) => (
                       <RestaurantCard restaurant={restaurant} />
                     ))}
                   </div>
@@ -154,9 +180,7 @@ export default function BetterProfile({
                     Reviews on restaurants
                   </p>
                   <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
-                    {reviews?.map((review, index) => (
-                      <ReviewCard review={review} />
-                    ))}
+                    {reviews?.map((review) => <ReviewCard review={review} />)}
                   </div>
                 </div>
               </div>

@@ -1,8 +1,8 @@
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
 }
 
 function DropDown() {
@@ -28,8 +28,8 @@ function DropDown() {
               <a
                 href="#"
                 className={classNames(
-                  focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2 text-sm',
+                  focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  "block px-4 py-2 text-sm"
                 )}
               >
                 Account settings
@@ -41,8 +41,8 @@ function DropDown() {
               <a
                 href="#"
                 className={classNames(
-                  focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2 text-sm',
+                  focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  "block px-4 py-2 text-sm"
                 )}
               >
                 Support
@@ -54,8 +54,8 @@ function DropDown() {
               <a
                 href="#"
                 className={classNames(
-                  focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2 text-sm',
+                  focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  "block px-4 py-2 text-sm"
                 )}
               >
                 License
@@ -68,8 +68,8 @@ function DropDown() {
                 <button
                   type="submit"
                   className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'block w-full px-4 py-2 text-left text-sm',
+                    focus ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                    "block w-full px-4 py-2 text-left text-sm"
                   )}
                 >
                   Sign out

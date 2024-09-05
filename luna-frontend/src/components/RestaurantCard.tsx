@@ -1,12 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 
-function RestaurantCard({ restaurant }) {
+interface RestaurantCardProp {
+  restaurant: { category: string; image: string; _id: string; name: string };
+}
+
+function RestaurantCard({ restaurant }: RestaurantCardProp) {
   const navigate = useNavigate();
 
-  function handleClick(id) {
+  function handleClick(id: string) {
     navigate(`/restaurant/${id}`, {
       replace: true,
     });

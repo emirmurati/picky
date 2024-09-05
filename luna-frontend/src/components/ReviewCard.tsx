@@ -1,18 +1,28 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import Loader from "./Loader";
-import Avatar from "../assets/img/avatar.jpeg";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 
-function classNames(...classes) {
+export interface ReviewCardProp {
+  review: {
+    comments?: string[];
+    content: string;
+    _id: string;
+    likes: number;
+    rating: number;
+    restaurant: { _id: string; image: string; name: string };
+    user: { firstName: string; lastName: string; avatar: string };
+    createdAt: string;
+  };
+}
+
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-function ReviewCard({ review }) {
+function ReviewCard({ review }: ReviewCardProp) {
+  console.log(review);
   const navigate = useNavigate();
 
-  function handleClick(id) {
+  function handleClick(id: string) {
     navigate(`/restaurant/${id}`, {
       replace: true,
     });

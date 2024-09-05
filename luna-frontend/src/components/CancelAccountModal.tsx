@@ -8,8 +8,12 @@ import {
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
+interface CancelAccountProp {
+  setCancelButton: (arg: boolean) => void;
+}
+
 // eslint-disable-next-line react/prop-types
-function CancelAccountModal({ setCancelButton }) {
+function CancelAccountModal({ setCancelButton }: CancelAccountProp) {
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
 
@@ -98,7 +102,7 @@ function CancelAccountModal({ setCancelButton }) {
                 type="button"
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 onClick={() => {
-                  setCancelButton((prev) => !prev);
+                  setCancelButton(false);
                   setOpen(false);
                 }}
                 data-autofocus

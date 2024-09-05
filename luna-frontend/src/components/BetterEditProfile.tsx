@@ -1,4 +1,4 @@
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import CancelAccountModal from "./CancelAccountModal";
 import { useForm } from "react-hook-form";
@@ -6,14 +6,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import Loader from "./Loader";
 import API from "../../axios";
+import { UserType } from "../lib/GlobalTypes";
 
-export default function BetterEditProfile({ user }) {
+interface UserProp {
+  user: UserType;
+}
+
+export default function BetterEditProfile({ user }: UserProp): JSX.Element {
   const [cancelButton, setCancelButton] = useState(false);
   const token = window.localStorage.getItem("token");
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<UserType>();
   const queryClient = useQueryClient();
   const { mutate, isPending, error } = useMutation({
-    mutationFn: async (obj) => {
+    mutationFn: async (obj: UserType) => {
       const res = await API.patch(`/users/updateMe`, obj, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -33,9 +38,14 @@ export default function BetterEditProfile({ user }) {
       toast.error("Something went wrong :(");
     },
   });
+  console.log(user);
 
-  function onSubmit(data) {
-    mutate({ ...data, avatar: data?.avatar[0] });
+  function onSubmit(data: UserType) {
+    console.log(data);
+    mutate({
+      ...data,
+      avatar: data?.avatar[0],
+    });
   }
   console.log(error);
   if (isPending) return <Loader />;
@@ -200,10 +210,10 @@ export default function BetterEditProfile({ user }) {
               <div className="mt-2">
                 <input
                   id="tel"
-                  name="phoneNumber"
                   type="tel"
                   autoComplete="tel"
                   {...register("phoneNumber")}
+                  name="phoneNumber"
                   defaultValue={user?.phoneNumber}
                   className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -220,10 +230,10 @@ export default function BetterEditProfile({ user }) {
               <div className="mt-2">
                 <input
                   id="street-address"
-                  name="location"
                   type="text"
                   defaultValue={user?.location}
                   {...register("location")}
+                  name="location"
                   autoComplete="street-address"
                   className="block w-full rounded-md border-0 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
